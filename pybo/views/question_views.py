@@ -44,9 +44,6 @@ def question_modify(request, question_id):
 
 @login_required(login_url='common:login')
 def question_delete(request, question_id):
-    """
-    pybo 질문삭제
-    """
     question = get_object_or_404(Question, pk=question_id)
 
     if question.answer_set.count() > 0:
@@ -60,7 +57,7 @@ def question_delete(request, question_id):
         return redirect('pybo:detail', question_id=question.id)
 
     question.delete()
-    return redirect('pybo:question_list', question.category.name)
+    return redirect('pybo:index')
 
 @login_required(login_url='common:login')
 def question_vote(request, question_id):
