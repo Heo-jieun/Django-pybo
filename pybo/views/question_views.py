@@ -49,9 +49,6 @@ def question_delete(request, question_id):
     if question.answer_set.count() > 0:
         messages.error(request, '답변이 등록된 질문은 삭제할수 없습니다.')
         return redirect('pybo:detail', question_id=question.id)
-    if question.comment_set.count() > 0:
-        messages.error(request, '댓글이 등록된 질문은 삭제할수 없습니다.')
-        return redirect('pybo:detail', question_id=question.id)
     if request.user != question.author and not request.user.is_staff:
         messages.error(request, '삭제권한이 없습니다')
         return redirect('pybo:detail', question_id=question.id)
